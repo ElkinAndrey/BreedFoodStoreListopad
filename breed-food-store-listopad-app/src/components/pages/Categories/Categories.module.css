@@ -1,0 +1,20 @@
+.headerButtons{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    height: 100%;
+    width: 100%;
+}
+
+.body {
+    padding: 20px 30px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category {
+    margin: 0px 10px 60px 10px;
+}

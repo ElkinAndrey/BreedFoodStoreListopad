@@ -1,10 +1,11 @@
 import { React } from "react";
 import "./App.css";
+import Categories from './components/pages/Categories/Categories';
 
 function App() {
     return (
         <div>
-            Листопад
+            <Categories/>
         </div>
     );
 }

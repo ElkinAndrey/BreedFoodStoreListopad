@@ -1,0 +1,144 @@
+.category {
+  /* время опускания */
+  --lowering-time: 0.2s;
+  /* время подьем */
+  --lifting-time: 0.2s;
+  /* величина, на которую будет выдвигатся блок */
+  --output-value: 45px;
+  /* отступ внутри */
+  --padding: 10px;
+  /* рамка вокруг блока */
+  --border: 5px;
+}
+
+.category {
+  cursor: pointer;
+  width: 220px;
+  position: relative;
+  border-radius: 10px;
+  padding: var(--padding) 0px;
+  background-color: var(--element);
+  outline: solid 0px var(--element);
+  outline-offset: -1px;
+  z-index: 1;
+  box-shadow: 0px 0px 0px -1px var(--element);
+  transition: background-color var(--lifting-time) ease-in-out,
+    box-shadow var(--lifting-time) ease-in-out,
+    outline var(--lifting-time) ease-in-out,
+    z-index 0s ease-in-out var(--lifting-time);
+}
+
+.category:hover {
+  background-color: var(--element-active);
+  outline: solid calc(var(--border) + 1px) var(--element-active);
+  position: relative;
+  z-index: 2;
+  box-shadow: 0px var(--output-value) 0px var(--border) var(--element-active);
+  transition: background-color var(--lowering-time) ease-in-out,
+    box-shadow var(--lowering-time) ease-in-out,
+    outline var(--lowering-time) ease-in-out, z-index 0s ease-in-out 0s;
+}
+
+.category_content {
+  position: relative;
+  margin: 0px var(--padding);
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  margin-top: -10px;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform var(--lifting-time) ease-in-out,
+    margin-top var(--lifting-time) ease-in-out,
+    opacity var(--lifting-time) ease-in-out;
+}
+
+.category:hover .buttons {
+  transform: scale(1);
+  margin-top: var(--padding);
+  opacity: 1;
+  transition: transform var(--lowering-time) ease-in-out,
+    margin-top var(--lowering-time) ease-in-out,
+    opacity var(--lowering-time) ease-in-out;
+}
+
+.logo {
+  font-size: 22px;
+  margin-bottom: 10px;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.image {
+  width: 100%;
+  object-fit: cover;
+  height: 220px;
+  border-radius: 10px;
+  margin-bottom: -3px;
+}
+
+.button_update {
+  cursor: pointer;
+  height: 35px;
+  font-family: GardensCM;
+  font-size: 22px;
+  border-radius: 10px;
+  border: 0px;
+  background-color: var(--button);
+  transition: all 0.15s ease-in-out;
+  width: 100%;
+}
+
+.button_update * {
+  pointer-events: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button_update:hover {
+  background-color: var(--button-active);
+}
+
+.button_delete {
+  cursor: pointer;
+  height: 35px;
+  font-family: GardensCM;
+  font-size: 22px;
+  color: black;
+  border-radius: 10px;
+  border: 0px;
+  background-color: var(--button-delete);
+  transition: all 0.15s ease-in-out;
+  width: 35px;
+  flex: 0 0 35px;
+  margin-left: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.button_delete * {
+  pointer-events: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.button_delete img {
+  height: 25px;
+  width: 25px;
+  margin: auto;
+}
+
+.button_delete:hover {
+  background-color: var(--button-delete-active);
+}

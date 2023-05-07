@@ -1,0 +1,27 @@
+@font-face {
+    font-family: GardensCM;
+    src: url("../public/fonts/GardensCM.ttf");
+}
+
+* {
+    font-family: GardensCM;
+}
+
+html body {
+    margin: 0px;
+    padding: 0px;
+    background-color: var(--background);
+}
+
+:root {
+    /* Цвета */
+    
+    --button: #fdde0d;
+    --button-active: #d3b805;
+    --button-delete: #fd4d36;
+    --button-delete-active: #c41f09;
+    --element: #ececec;
+    --element-active: #d9d9d9;
+    --shadow: #000000;
+    --background: #ffffff;
+}

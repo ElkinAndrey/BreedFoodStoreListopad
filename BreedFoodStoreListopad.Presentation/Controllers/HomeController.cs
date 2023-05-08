@@ -1,3 +1,4 @@
+using BreedFoodStoreListopad.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreedFoodStoreListopad.Presentation.Controllers
@@ -10,7 +11,10 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
 		[Route("[action]")]
 		public IActionResult Get()
 		{
-			return Ok("Листопад");
+			Category category = new Category("1", "2.jpg");
+			category.Name = "2";
+			category.FileName = "3";
+			return Ok(category);
 		}
 	}
 }

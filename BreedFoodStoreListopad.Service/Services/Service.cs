@@ -6,10 +6,16 @@ using BreedFoodStoreListopad.Service.Features;
 
 namespace BreedFoodStoreListopad.Service.Services
 {
+    /// <summary>
+    /// Сервис приложения
+    /// </summary>
     public class Service : IService
     {
         private IRepositoryManager _manager;
 
+        /// <summary>
+        /// Руководитель хранилищами приложения
+        /// </summary>
         public Service(IRepositoryManager manager)
         {
             _manager = manager;
@@ -40,6 +46,26 @@ namespace BreedFoodStoreListopad.Service.Services
             {
                 throw ex;
             }
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length)
+        {
+            if (start is null)
+                throw new EmptyStartException();
+
+            if (length is null)
+                throw new EmptyLengthException();
+
+            int notNullStart = start ?? 0;
+            int notNullLength = length ?? 0;
+
+            if (notNullStart < 0)
+                throw new NegativeStartException(notNullStart);
+
+            if (notNullLength < 0)
+                throw new NegativeLengthException(notNullLength);
+
+            return await _manager.Repository.GetCategoriesAsync(notNullStart, notNullLength);
         }
     }
 }

@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BreedFoodStoreListopad.Domain\BreedFoodStoreListopad.Domain.csproj" />
+    <ProjectReference Include="..\BreedFoodStoreListopad.Persistence\BreedFoodStoreListopad.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
 using BreedFoodStoreListopad.Domain.Entities;
+using BreedFoodStoreListopad.Persistence.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BreedFoodStoreListopad.Presentation.Controllers
@@ -7,14 +8,22 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
 	[Route("api/[controller]")]
 	public class HomeController : ControllerBase
 	{
-		[HttpGet]
-		[Route("[action]")]
-		public IActionResult Get()
+		public class A
 		{
-			Category category = new Category("1", "2.jpg");
-			category.Name = "2";
-			category.FileName = "3";
-			return Ok(category);
+
+			public string Name { get; set; }
+			public IFormFile File { get; set; }
+
+        }
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> Get([FromForm]A file)
+		{
+            FakeObjectStorage fakeObjectStorage = new FakeObjectStorage();
+			await fakeObjectStorage.AddFile("qwerty", file.File.FileName, file.File.ContentType, file.File.OpenReadStream());
+
+            return Ok();
 		}
 	}
 }

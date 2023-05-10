@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BreedFoodStoreListopad.Domain\BreedFoodStoreListopad.Domain.csproj" />
+    <ProjectReference Include="..\BreedFoodStoreListopad.Infrastructure\BreedFoodStoreListopad.Infrastructure.csproj" />
     <ProjectReference Include="..\BreedFoodStoreListopad.Persistence\BreedFoodStoreListopad.Persistence.csproj" />
     <ProjectReference Include="..\BreedFoodStoreListopad.Service\BreedFoodStoreListopad.Service.csproj" />
   </ItemGroup>

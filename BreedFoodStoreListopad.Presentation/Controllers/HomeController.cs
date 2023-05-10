@@ -1,11 +1,6 @@
-using BreedFoodStoreListopad.Domain.Entities;
 using BreedFoodStoreListopad.Infrastructure.ViewModel;
-using BreedFoodStoreListopad.Persistence.Repositories;
 using BreedFoodStoreListopad.Service.Abstractions;
-using BreedFoodStoreListopad.Service.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Net.Mime;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace BreedFoodStoreListopad.Presentation.Controllers
 {
@@ -47,5 +42,26 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
 		}
-	}
+
+        /// <summary>
+        /// Получить срез категорий
+        /// </summary>
+        /// <param name="model">Параметры среза</param>
+        /// <returns>Категории</returns>
+        [HttpPost]
+        [Route("GetCategories")]
+        public async Task<IActionResult> GetCategoriesAsync(GetCategoriesViewModel model)
+        {
+            try
+            {
+                var categories =  await _service.GetCategoriesAsync(model.Start, model.Length);
+
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+    }
 }

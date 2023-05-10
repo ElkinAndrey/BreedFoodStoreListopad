@@ -74,5 +74,12 @@ namespace BreedFoodStoreListopad.Persistence.Abstractions
         /// <param name="category">Новая категория</param>
         /// <returns></returns>
         public Task AddCategoryAsync(Category category);
+
+        /// <summary>
+        /// Содержит ли хранилище категорию с таким именем
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Task<bool> IsHasName(string name);
     }
 }

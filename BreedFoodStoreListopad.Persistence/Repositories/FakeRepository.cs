@@ -63,6 +63,13 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
             );
         }
 
+        public async Task<bool> IsHasName(string name)
+        {
+            return await Task.Run(()
+                => _categories.Any(category => category.Name == name)
+            );
+        }
+
         public async Task SetNewFileByIdAsync(Guid id, string filename)
         {
             await Task.Run(()

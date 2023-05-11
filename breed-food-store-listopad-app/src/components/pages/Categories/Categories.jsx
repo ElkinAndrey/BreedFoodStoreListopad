@@ -8,9 +8,11 @@ import Delete from "../../../views/Delete/Delete";
 import { useFetching } from "./../../../hooks/useFetching";
 import Service from "../../../api/Service";
 import PageFetching from "./../../../views/PageFetching/PageFetching";
+import PaginationBar from "../../forms/PaginationBar/PaginationBar";
 
 const Categories = () => {
   const dataFetchedRef = useRef(false);
+  const [paginationPage, setPaginationPage] = useState(1);
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState();
   const [delName, setDelName] = useState("");
@@ -59,21 +61,32 @@ const Categories = () => {
       <div className={classes.body}>
         <PageFetching loading={isCategoriesLoading} error={categoriesError}>
           {categories?.length === 0 ? (
-            <div className={classes.hasNotCategories}>Категории отсутствуют</div>
+            <div className={classes.hasNotCategories}>
+              Категории отсутствуют
+            </div>
           ) : (
-            <div className={classes.categories}>
-              {categories?.map((category) => (
-                <div key={category.id} className={classes.category}>
-                  <Category
-                    name={category.name}
-                    filePath={Service.fullFilePath(category.filePath)}
-                    onClickDelete={() => {
-                      setDelName(category.name)
-                      setModal(true);
-                    }}
-                  />
-                </div>
-              ))}
+            <div className={classes.content}>
+              <div className={classes.categories}>
+                {categories?.map((category) => (
+                  <div key={category.id} className={classes.category}>
+                    <Category
+                      name={category.name}
+                      filePath={Service.fullFilePath(category.filePath)}
+                      onClickDelete={() => {
+                        setDelName(category.name);
+                        setModal(true);
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <PaginationBar
+                className={classes.paginationBar}
+                start={1}
+                end={13}
+                page={paginationPage}
+                setPage={setPaginationPage}
+              />
             </div>
           )}
         </PageFetching>

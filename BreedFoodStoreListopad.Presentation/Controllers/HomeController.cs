@@ -56,9 +56,6 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
             {
                 var categories =  await _service.GetCategoriesAsync(model.Start, model.Length);
 
-                // для того, чтобы протестировать анимацию загрузки
-                Thread.Sleep(1000);
-
                 return Ok(categories);
             }
             catch (Exception ex)

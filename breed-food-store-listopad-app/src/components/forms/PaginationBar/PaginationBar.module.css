@@ -1,0 +1,53 @@
+.paginationBar button {
+  height: 30px;
+  min-width: 30px;
+  border: #ffffff solid 2px;
+  border-radius: 3px;
+  background-color: #ffffff;
+}
+
+.paginationBar button:hover {
+  background-color: var(--element);
+  border: var(--element) solid 2px;
+}
+
+.paginationBar .active {
+  background-color: var(--button);
+  border: var(--button) solid 2px;
+  color: #000000;
+}
+
+.paginationBar .active:hover {
+  background-color: var(--button);
+  border: var(--button) solid 2px;
+}
+
+.paginationBar .buttons {
+  border: var(--element) solid 1px;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.paginationBar .switch {
+  border: var(--element) solid 2px;
+  background-color: var(--element);
+}
+
+.paginationBar .switch:hover {
+  background-color: var(--button);
+  border: var(--button) solid 2px;
+  color: #000000;
+}
+
+.paginationBar .pass {
+  height: 30px;
+  width: 30px;
+  border: #ffffff solid 0px;
+  border-radius: 3px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.paginationBar {
+  display: flex;
+}

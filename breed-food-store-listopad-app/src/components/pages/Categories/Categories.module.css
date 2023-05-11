@@ -34,3 +34,17 @@
   color: var(--gray-text);
   font-size: 22px;
 }
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.paginationBar {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  bottom: 0px;
+}

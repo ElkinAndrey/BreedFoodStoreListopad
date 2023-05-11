@@ -5,44 +5,30 @@ import classes from "./Categories.module.css";
 import ButtonAddCategory from "./../../../views/ButtonAddCategory/ButtonAddCategory";
 import Modal from "../../forms/Modal/Modal";
 import Delete from "../../../views/Delete/Delete";
+import { useFetching } from "./../../../hooks/useFetching";
+import Service from "../../../api/Service";
+import PageFetching from "./../../../views/PageFetching/PageFetching";
 
 const Categories = () => {
+  const dataFetchedRef = useRef(false);
   const [modal, setModal] = useState(false);
+  const [categories, setCategories] = useState();
 
-  const [categories, setCategories] = useState([
-    {
-      id: 1,
-      name: "Крупы",
-      filePath:
-        "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ab_food_02.jpg",
-    },
-    {
-      id: 2,
-      name: "Овощи",
-      filePath:
-        "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ab_food_02.jpg",
-    },
-    {
-      id: 3,
-      name: "Фрукты",
-      filePath:
-        "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ab_food_02.jpg",
-    },
-    {
-      id: 4,
-      name: "Крупы",
-      filePath:
-        "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ab_food_02.jpg",
-    },
-    {
-      id: 5,
-      name: "Напитки",
-      filePath:
-        "https://upload.wikimedia.org/wikipedia/commons/b/bc/Ab_food_02.jpg",
-    },
-  ]);
+  const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
+    async (start, length) => {
+      const response = await Service.getCategories(start, length);
+      setCategories(response.data);
+    }
+  );
+
+  useEffect(() => {
+    if (dataFetchedRef.current) return;
+    dataFetchedRef.current = true;
+    fetchCategories(0, 100);
+  }, []);
+
   return (
-    <div>
+    <div className={classes.all}>
       <Header>
         <div className={classes.headerButtons}>
           <ButtonAddCategory />
@@ -68,21 +54,27 @@ const Categories = () => {
           backAction={() => setModal(false)}
         />
       </Modal>
-      
+
       <div className={classes.body}>
-        <div className={classes.categories}>
-          {categories.map((category) => (
-            <div key={category.id} className={classes.category}>
-              <Category
-                name={category.name}
-                filePath={category.filePath}
-                onClickDelete={() => {
-                  setModal(true);
-                }}
-              />
+        <PageFetching loading={isCategoriesLoading} error={categoriesError}>
+          {categories?.length === 0 ? (
+            <div className={classes.hasNotCategories}>Категории отсутствуют</div>
+          ) : (
+            <div className={classes.categories}>
+              {categories?.map((category) => (
+                <div key={category.id} className={classes.category}>
+                  <Category
+                    name={category.name}
+                    filePath={Service.fullFilePath(category.filePath)}
+                    onClickDelete={() => {
+                      setModal(true);
+                    }}
+                  />
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </PageFetching>
       </div>
     </div>
   );

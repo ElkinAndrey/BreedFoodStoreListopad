@@ -12,7 +12,14 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IService, Service>();
 builder.Services.AddTransient<IRepositoryManager, FakeRepositoryManager>();
 
+
+
 var app = builder.Build();
+
+app.UseCors(options =>
+    options.WithOrigins("http://localhost:3000")
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 if (app.Environment.IsDevelopment())
 {

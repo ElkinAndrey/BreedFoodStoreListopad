@@ -1,13 +1,20 @@
-.headerButtons{
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    height: 100%;
-    width: 100%;
+.all {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 100%;
+  width: 100%;
 }
 
 .body {
-    padding: 20px 30px;
+  flex-grow: 1;
+  padding: 20px 30px;
 }
 
 .categories {
@@ -16,5 +23,14 @@
 }
 
 .category {
-    margin: 0px 10px 60px 10px;
+  margin: 0px 10px 60px 10px;
+}
+
+.hasNotCategories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--gray-text);
+  font-size: 22px;
 }

@@ -13,6 +13,7 @@ const Categories = () => {
   const dataFetchedRef = useRef(false);
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState();
+  const [delName, setDelName] = useState("");
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
     async (start, length) => {
@@ -46,7 +47,7 @@ const Categories = () => {
       >
         <Delete
           logo={"Удаление категории"}
-          text={'Вы уверены, что хотите удалить категорию "Напитки"?'}
+          text={`Вы уверены, что хотите удалить категорию "${delName}"?`}
           deleteAction={() => {
             console.log("Успешно удалено");
             setModal(false);
@@ -67,6 +68,7 @@ const Categories = () => {
                     name={category.name}
                     filePath={Service.fullFilePath(category.filePath)}
                     onClickDelete={() => {
+                      setDelName(category.name)
                       setModal(true);
                     }}
                   />

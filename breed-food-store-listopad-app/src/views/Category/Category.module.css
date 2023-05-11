@@ -90,6 +90,12 @@
   background-color: var(--button);
   transition: all 0.15s ease-in-out;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+
 }
 
 .button_update * {

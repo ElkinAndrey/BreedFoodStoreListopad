@@ -1,4 +1,5 @@
 .button {
+  color: black;
   display: flex;
   align-items: center;
   padding: 12px 22px;
@@ -7,6 +8,7 @@
   background-color: var(--button);
   transition: background-color 0.15s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .button:hover {

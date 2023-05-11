@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Category.module.css";
+import { Link } from 'react-router-dom';
 
 const Category = ({ name, filePath, onClickDelete }) => {
   return (
@@ -9,11 +10,11 @@ const Category = ({ name, filePath, onClickDelete }) => {
           <div className={classes.logo}>{name}</div>
           <img className={classes.image} src={filePath} alt="" />
           <div className={classes.buttons}>
-            <button className={classes.button_update}>
-              <div>Изменить</div>
-            </button>
+            <Link to={`/изменить_категорию/${name}`} className={classes.button_update}>
+              Изменить
+            </Link>
             <button className={classes.button_delete} onClick={onClickDelete}>
-              <img src="./images/trash.png  " alt="" />
+              <img src="/images/trash.png  " alt="" />
             </button>
           </div>
         </div>

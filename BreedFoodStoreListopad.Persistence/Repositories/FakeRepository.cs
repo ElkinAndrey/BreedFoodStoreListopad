@@ -31,7 +31,17 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
         public async Task<IEnumerable<Category>> GetCategoriesAsync(int start, int length)
         {
             return await Task.Run(()
-                => _categories.Where(category => !category.IsObjectInTrash)
+                => _categories.Where(category => category.DeletionDate is null)
+                              .OrderBy(category => category.DeletionDate)
+                              .Skip(start)
+                              .Take(length)
+            );
+        }
+
+        public async Task<IEnumerable<Category>> GetCategoriesInTrashAsync(int start, int length)
+        {
+            return await Task.Run(()
+                => _categories.Where(category => category.DeletionDate is not null)
                               .OrderBy(category => category.Name)
                               .Skip(start)
                               .Take(length)

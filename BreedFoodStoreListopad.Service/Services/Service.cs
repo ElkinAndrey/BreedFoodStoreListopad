@@ -71,6 +71,26 @@ namespace BreedFoodStoreListopad.Service.Services
             return await _manager.Repository.GetCategoriesAsync(notNullStart, notNullLength);
         }
 
+        public async Task<IEnumerable<Category>> GetCategoriesInTrashAsync(int? start, int? length)
+        {
+            if (start is null)
+                throw new EmptyStartException();
+
+            if (length is null)
+                throw new EmptyLengthException();
+
+            int notNullStart = start ?? 0;
+            int notNullLength = length ?? 0;
+
+            if (notNullStart < 0)
+                throw new NegativeStartException(notNullStart);
+
+            if (notNullLength < 0)
+                throw new NegativeLengthException(notNullLength);
+
+            return await _manager.Repository.GetCategoriesInTrashAsync(notNullStart, notNullLength);
+        }
+
         public async Task<FileStreamResult> GetImageAsync(string path, ImageCreator imageCreator)
         {
             string contentType = MIME.GetContentType(path);

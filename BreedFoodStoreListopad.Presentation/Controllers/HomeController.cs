@@ -65,6 +65,27 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
+        /// Получить срез удаленных категорий
+        /// </summary>
+        /// <param name="model">Параметры среза</param>
+        /// <returns>Удаленные категории</returns>
+        [HttpPost]
+        [Route("GetCategoriesInTrash")]
+        public async Task<IActionResult> GetCategoriesInTrashAsync(GetCategoriesViewModel model)
+        {
+            try
+            {
+                var categories = await _service.GetCategoriesInTrashAsync(model.Start, model.Length);
+
+                return Ok(categories);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Получить картинку по пути
         /// </summary>
         /// <param name="folder">Папка</param>

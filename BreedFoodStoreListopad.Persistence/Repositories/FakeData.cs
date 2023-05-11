@@ -24,7 +24,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
                 Id = Guid.NewGuid(),
                 Name = "Кофе",
                 FileName = "Coffe.jpg",
-                IsObjectInTrash = true,
+                DeletionDate = DateTime.Now,
             },
             new Category()
             {

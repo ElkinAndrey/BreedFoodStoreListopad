@@ -83,7 +83,7 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		/// <summary>
 		/// Если объект в мусорной корзине, то true.
 		/// </summary>
-		public bool IsObjectInTrash { get; set; } = false;
+		public DateTime? DeletionDate { get; set; } = null;
 
         /// <summary>
         /// Категория товара

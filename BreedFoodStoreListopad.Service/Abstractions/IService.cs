@@ -28,6 +28,14 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         public Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length);
 
         /// <summary>
+        /// Получить списко с удаленными категориями
+        /// </summary>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="length">Количество категорий</param>
+        /// <returns>Список с удаленными категориями</returns>
+        public Task<IEnumerable<Category>> GetCategoriesInTrashAsync(int? start, int? length);
+
+        /// <summary>
         /// Получить картинку по пути
         /// </summary>
         /// <param name="path">Путь к картинке</param>

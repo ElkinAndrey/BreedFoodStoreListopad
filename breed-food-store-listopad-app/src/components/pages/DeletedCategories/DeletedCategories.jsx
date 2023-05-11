@@ -1,25 +1,28 @@
 import React, { useEffect, useRef, useState } from "react";
-import Category from "./../../../views/Category/Category";
+import classes from "./DeletedCategories.module.css";
 import Header from "./../../layout/Header/Header";
-import classes from "./Categories.module.css";
-import ButtonWithImage from "../../../views/ButtonWithImage/ButtonWithImage";
-import Modal from "../../forms/Modal/Modal";
-import Delete from "../../../views/Delete/Delete";
+import Service from "./../../../api/Service";
 import { useFetching } from "./../../../hooks/useFetching";
-import Service from "../../../api/Service";
 import PageFetching from "./../../../views/PageFetching/PageFetching";
-import PaginationBar from "../../forms/PaginationBar/PaginationBar";
+import PaginationBar from "./../../forms/PaginationBar/PaginationBar";
+import DeletedCategory from "../../../views/DeletedCategory/DeletedCategory";
+import Modal from "./../../forms/Modal/Modal";
+import Delete from "./../../../views/Delete/Delete";
+import Restore from "./../../../views/Restore/Restore";
+import ButtonWithImage from "./../../../views/ButtonWithImage/ButtonWithImage";
 
-const Categories = () => {
+const DeletedCategories = () => {
   const dataFetchedRef = useRef(false);
   const [paginationPage, setPaginationPage] = useState(1);
-  const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState();
+  const [modalRestore, setModalRestore] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
+  const [resName, setResName] = useState("");
   const [delName, setDelName] = useState("");
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
     async (start, length) => {
-      const response = await Service.getCategories(start, length);
+      const response = await Service.getDeletedCategories(start, length);
       setCategories(response.data);
     }
   );
@@ -29,27 +32,42 @@ const Categories = () => {
     dataFetchedRef.current = true;
     fetchCategories(0, 100);
   }, []);
-
   return (
     <div className={classes.all}>
       <Header>
         <div className={classes.headerButtons}>
           <ButtonWithImage
-            text={"Удаленные категории"}
-            imagePath={"/images/trash.png"}
-            to={"/удаленные_категории"}
-            style={{ marginRight: "10px" }}
-          />
-          <ButtonWithImage
-            text={"Добавить категорию"}
-            imagePath={"/images/category.png"}
-            to={"/добавить_категорию"}
+            text={"На главную"}
+            imagePath={"/images/back.png"}
+            to={"/"}
           />
         </div>
       </Header>
+
       <Modal
-        active={modal}
-        setActive={setModal}
+        active={modalRestore}
+        setActive={setModalRestore}
+        style={{
+          borderRadius: "10px",
+          padding: "20px",
+          width: "380px",
+          border: "3px solid var(--button-restore)",
+        }}
+      >
+        <Restore
+          logo={"Востановить категорию"}
+          text={`Вы уверены, что хотите востановить категорию "${resName}"?`}
+          restoreAction={() => {
+            console.log("Категория была востановлена");
+            setModalRestore(false);
+          }}
+          backAction={() => setModalRestore(false)}
+        />
+      </Modal>
+
+      <Modal
+        active={modalDelete}
+        setActive={setModalDelete}
         style={{
           borderRadius: "10px",
           padding: "20px",
@@ -58,13 +76,13 @@ const Categories = () => {
         }}
       >
         <Delete
-          logo={"Удаление категории"}
-          text={`Вы уверены, что хотите удалить категорию "${delName}"?`}
+          logo={"Полностью удалить категорию"}
+          text={`Вы уверены, что хотите полностью удалить категорию "${delName}"?`}
           deleteAction={() => {
-            console.log("Успешно удалено");
-            setModal(false);
+            console.log("Категория была полностью удалена");
+            setModalDelete(false);
           }}
-          backAction={() => setModal(false)}
+          backAction={() => setModalDelete(false)}
         />
       </Modal>
 
@@ -83,11 +101,15 @@ const Categories = () => {
               <div className={classes.categories}>
                 {categories?.map((category) => (
                   <div key={category.id} className={classes.category}>
-                    <Category
+                    <DeletedCategory
                       category={category}
-                      onClickDelete={() => {
+                      onRestore={() => {
+                        setResName(category.name);
+                        setModalRestore(true);
+                      }}
+                      onDelete={() => {
                         setDelName(category.name);
-                        setModal(true);
+                        setModalDelete(true);
                       }}
                     />
                   </div>
@@ -108,4 +130,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default DeletedCategories;

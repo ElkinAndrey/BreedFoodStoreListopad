@@ -14,17 +14,24 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
             new Category()
             {
                 Id = new Guid("8ac303a0-6d9a-4c63-b916-305f7041fc95"),
-                Name = "Крупы",
+                Name = "Полезные злаки и крупы",
                 FileName = "Test1.jpg",
                 OldNames = new List<string> { "Test2", "Test3", "Test4", "Test5" },
                 OldFileNames = new List<string> { "Test2.jpg", "Test3.jpg" }
             },
             new Category()
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("f4c8dded-d2f4-4bfb-b96b-5d66adb7244d"),
                 Name = "Кофе",
                 FileName = "Coffe.jpg",
-                DeletionDate = DateTime.Now,
+                DeletionDate = new DateTime(2023, 5, 11),
+            },
+            new Category()
+            {
+                Id = new Guid("d729d442-160a-4196-b36c-96c0090727ad"),
+                Name = "Чай",
+                FileName = "Tea.jpg",
+                DeletionDate = new DateTime(2023, 5, 12),
             },
             new Category()
             {

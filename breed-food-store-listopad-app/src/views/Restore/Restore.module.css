@@ -1,0 +1,40 @@
+.logo {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 22px;
+  max-width: 100%;
+  word-wrap: break-word;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.restore {
+  background-color: var(--button-restore);
+}
+
+.restore:hover {
+  background-color: var(--button-restore-active);
+}
+
+.back {
+  background-color: var(--button);
+}
+
+.back:hover {
+  background-color: var(--button-active);
+}
+
+.button {
+  padding: 10px 15px;
+  border: 0px;
+  border-radius: 10px;
+  font-size: 22px;
+  transition: all 0.15s ease-in-out;
+}

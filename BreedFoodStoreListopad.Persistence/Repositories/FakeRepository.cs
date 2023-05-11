@@ -32,7 +32,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
         {
             return await Task.Run(()
                 => _categories.Where(category => category.DeletionDate is null)
-                              .OrderBy(category => category.DeletionDate)
+                              .OrderBy(category => category.Name)
                               .Skip(start)
                               .Take(length)
             );
@@ -42,7 +42,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
         {
             return await Task.Run(()
                 => _categories.Where(category => category.DeletionDate is not null)
-                              .OrderBy(category => category.Name)
+                              .OrderByDescending(category => category.DeletionDate)
                               .Skip(start)
                               .Take(length)
             );

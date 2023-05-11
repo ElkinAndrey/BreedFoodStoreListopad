@@ -1,0 +1,50 @@
+.all {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.body {
+  flex-grow: 1;
+  padding: 20px 30px;
+}
+
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.category {
+  margin: 0px 10px 60px 10px;
+}
+
+.hasNotCategories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--gray-text);
+  font-size: 22px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.paginationBar {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  bottom: 0px;
+}
+
+.headerButtons {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 100%;
+  width: 100%;
+}

@@ -1,0 +1,87 @@
+.body {
+  display: flex;
+  background-color: var(--element);
+  transition: all 0.15s ease-in-out;
+  padding: 15px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.body:hover {
+  background-color: var(--element-active);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  text-decoration: none;
+  color: #000000;
+}
+
+.name {
+  font-size: 32px;
+}
+
+.date {
+  font-size: 22px;
+  display: flex;
+  align-items: end;
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+  width: 70px;
+  height: 70px;
+  margin-bottom: -2.5px;
+  margin-right: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
+  border: 0px;
+  border-radius: 10px;
+  padding: 0px 15px;
+  height: 32px;
+  width: 100%;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.delhelp {
+  display: flex;
+  align-items: end;
+  height: 100%;
+}
+
+.set {
+  background-color: var(--button);
+  margin-bottom: -32px;
+}
+
+.set:hover {
+  background-color: var(--button-active);
+}
+
+.del {
+  background-color: var(--button-delete);
+  margin-top: -32px;
+}
+
+.del:hover {
+  background-color: var(--button-delete-active);
+}
+
+.buttonlink {
+  height: 100%;
+  z-index: 1;
+}

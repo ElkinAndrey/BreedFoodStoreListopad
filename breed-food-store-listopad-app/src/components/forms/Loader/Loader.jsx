@@ -1,7 +1,7 @@
 import React from "react";
 import classes from "./Loader.module.css";
 
-const Loader = () => {
+const Loader = ({ loadingText }) => {
   return (
     <div>
       <div className={classes.body}>
@@ -16,7 +16,7 @@ const Loader = () => {
             r="30"
           ></circle>
         </svg>
-        <div className={classes.text}>Листопад</div>
+        <div className={classes.text}>{loadingText}</div>
       </div>
     </div>
   );

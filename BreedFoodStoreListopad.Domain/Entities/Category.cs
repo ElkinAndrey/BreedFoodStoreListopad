@@ -81,9 +81,14 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		public string FilePath { get => $"{ImagesFolder}/{Id}/{FileName}"; }
 
 		/// <summary>
-		/// Категория товара
+		/// Если объект в мусорной корзине, то true.
 		/// </summary>
-		public Category() { }
+		public bool IsObjectInTrash { get; set; } = false;
+
+        /// <summary>
+        /// Категория товара
+        /// </summary>
+        public Category() { }
 
 		/// <summary>
 		/// Категория товара

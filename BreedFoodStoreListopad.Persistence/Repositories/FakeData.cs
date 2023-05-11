@@ -21,6 +21,13 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
             },
             new Category()
             {
+                Id = Guid.NewGuid(),
+                Name = "Кофе",
+                FileName = "Coffe.jpg",
+                IsObjectInTrash = true,
+            },
+            new Category()
+            {
                 Id = new Guid("53a760b4-6c56-43d2-acb2-5ed9e0987ad8"),
                 Name = "Напитки",
                 FileName = "Example1.jpg",

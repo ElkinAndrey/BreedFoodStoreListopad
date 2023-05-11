@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BreedFoodStoreListopad.Domain\BreedFoodStoreListopad.Domain.csproj" />
     <ProjectReference Include="..\BreedFoodStoreListopad.Persistence\BreedFoodStoreListopad.Persistence.csproj" />
   </ItemGroup>

@@ -3,30 +3,16 @@ using BreedFoodStoreListopad.Persistence.Abstractions;
 
 namespace BreedFoodStoreListopad.Persistence.Repositories
 {
+    /// <summary>
+    /// Фейковое хранилище с данными, находящееся прямо на сервере
+    /// </summary>
     public class FakeRepository : IRepository
     {
-        private List<Category> _categories = new List<Category>
+        private List<Category> _categories;
+        public FakeRepository()
         {
-            new Category()
-            {
-                Name = "Test1",
-                FileName = "Test1.jpg",
-                OldNames = new List<string> { "Test2", "Test3", "Test4", "Test5" },
-                OldFileNames = new List<string> { "Test2.jpg", "Test3.jpg" }
-            },
-            new Category()
-            {
-                Name = "Example1",
-                FileName = "Example1.jpg",
-                OldNames = new List<string> { "Example2", "Example3" },
-                OldFileNames = new List<string> { "Example2.jpg", "Example3.jpg", "Example4.jpg" }
-            },
-            new Category()
-            {
-                Name = "Category1",
-                FileName = "Category1.jpg",
-            }
-        };
+            _categories = FakeData.Categories;
+        }
 
         public async Task AddCategoryAsync(Category category)
         {

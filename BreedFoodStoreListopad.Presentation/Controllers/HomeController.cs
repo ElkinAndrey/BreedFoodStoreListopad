@@ -63,5 +63,28 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Получить картинку по пути
+        /// </summary>
+        /// <param name="folder">Папка</param>
+        /// <param name="name">Имя</param>
+        /// <param name="file">Название картинки</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetImage/{folder}/{name}/{file}")]
+        public async Task<IActionResult> GetImageAsync(string folder, string name, string file)
+        {
+            try
+            {
+                var image =  await _service.GetImageAsync($"{folder}/{name}/{file}", File);
+
+                return image;
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

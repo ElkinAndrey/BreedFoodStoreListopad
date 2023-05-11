@@ -1,4 +1,6 @@
 ﻿using BreedFoodStoreListopad.Domain.Entities;
+using BreedFoodStoreListopad.Service.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BreedFoodStoreListopad.Service.Abstractions
 {
@@ -20,9 +22,17 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         /// <summary>
         /// Получить срез продуктовых категорий
         /// </summary>
-        /// <param name="start"></param>
-        /// <param name="length"></param>
-        /// <returns></returns>
+        /// <param name="start">Начало отчета</param>
+        /// <param name="length">Длина среза</param>
+        /// <returns>Список категорий</returns>
         public Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length);
+
+        /// <summary>
+        /// Получить картинку по пути
+        /// </summary>
+        /// <param name="path">Путь к картинке</param>
+        /// <param name="imageCreator">Метод для создания картинки из стрима</param>
+        /// <returns>Картинка</returns>
+        public Task<FileStreamResult> GetImageAsync(string path, ImageCreator imageCreator);
     }
 }

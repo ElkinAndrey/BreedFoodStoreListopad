@@ -3,9 +3,18 @@ using BreedFoodStoreListopad.Persistence.Abstractions;
 using BreedFoodStoreListopad.Service.Abstractions;
 using BreedFoodStoreListopad.Service.Exceptions;
 using BreedFoodStoreListopad.Service.Features;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BreedFoodStoreListopad.Service.Services
 {
+    /// <summary>
+    /// Метод для получения картинки из стрима
+    /// </summary>
+    /// <param name="fileStream">Стрим картинки</param>
+    /// <param name="contentType">MIME тип файла</param>
+    /// <returns>Картинка</returns>
+    public delegate FileStreamResult ImageCreator(Stream fileStream, string contentType);
+
     /// <summary>
     /// Сервис приложения
     /// </summary>
@@ -35,17 +44,11 @@ namespace BreedFoodStoreListopad.Service.Services
             if (await _manager.Repository.IsHasName(name))
                 throw new NameAlreadyExistsException();
 
-            try
-            {
-                string fileExtension = Path.GetExtension(fileName);
-                string newFileName = Guid.NewGuid().ToString() + fileExtension;
-                await _manager.Repository.AddCategoryAsync(new Category(name, newFileName));
-                await _manager.ObjectStorage.AddFile(Category.ImagesFolder, newFileName, contentType, stream);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            string fileExtension = Path.GetExtension(fileName);
+            string newFileName = Guid.NewGuid().ToString() + fileExtension;
+            Category category = new Category(name, newFileName);
+            await _manager.Repository.AddCategoryAsync(category);
+            await _manager.ObjectStorage.AddFile(category.FilePath, contentType, stream);
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length)
@@ -66,6 +69,19 @@ namespace BreedFoodStoreListopad.Service.Services
                 throw new NegativeLengthException(notNullLength);
 
             return await _manager.Repository.GetCategoriesAsync(notNullStart, notNullLength);
+        }
+
+        public async Task<FileStreamResult> GetImageAsync(string path, ImageCreator imageCreator)
+        {
+            string contentType = MIME.GetContentType(path);
+            if (contentType == MIME.MIMETypes.ApplicationOctetStream)
+                throw new MIMETypesException();
+
+            FileStreamResult image;
+            Stream stream = await _manager.ObjectStorage.GetFileAsync(path);
+            image = imageCreator(stream, contentType);
+            
+            return image;
         }
     }
 }

@@ -12,8 +12,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IService, Service>();
 builder.Services.AddTransient<IRepositoryManager, FakeRepositoryManager>();
 
-
-
 var app = builder.Build();
 
 app.UseCors(options =>

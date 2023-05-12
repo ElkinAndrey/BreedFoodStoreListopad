@@ -89,5 +89,13 @@ namespace BreedFoodStoreListopad.Persistence.Abstractions
         /// <param name="length">Количество категорий</param>
         /// <returns>Список с удаленными категориями</returns>
         public Task<IEnumerable<Category>> GetCategoriesInTrashAsync(int start, int length);
+
+        /// <summary>
+        /// Переместить категорию в список удаленных категорий
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <param name="date">Дата перемещения</param>
+        /// <returns></returns>
+        public Task MoveCategoryToTrashAsync(Guid id, DateTime date);
     }
 }

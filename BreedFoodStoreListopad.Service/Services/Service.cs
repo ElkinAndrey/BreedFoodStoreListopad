@@ -103,5 +103,19 @@ namespace BreedFoodStoreListopad.Service.Services
             
             return image;
         }
+
+        public async Task MoveCategoryToTrashAsync(Guid? id, DateTime? date)
+        {
+            if (id == null || id == Guid.Empty)
+                throw new EmptyIdException();
+
+            if (date == null || date == DateTime.MinValue)
+                throw new EmptyDateException();
+
+            Guid notId = id ?? Guid.Empty;
+            DateTime notNullDate = date ?? DateTime.Now;
+
+            await _manager.Repository.MoveCategoryToTrashAsync(notId, notNullDate);
+        }
     }
 }

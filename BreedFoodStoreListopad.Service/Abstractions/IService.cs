@@ -42,5 +42,13 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         /// <param name="imageCreator">Метод для создания картинки из стрима</param>
         /// <returns>Картинка</returns>
         public Task<FileStreamResult> GetImageAsync(string path, ImageCreator imageCreator);
+
+        /// <summary>
+        /// Переместить категорию в список удаленных категорий
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <param name="date">Дата перемещения</param>
+        /// <returns></returns>
+        public Task MoveCategoryToTrashAsync(Guid? id, DateTime? date);
     }
 }

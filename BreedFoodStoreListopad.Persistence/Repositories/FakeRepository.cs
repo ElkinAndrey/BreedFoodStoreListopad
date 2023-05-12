@@ -69,6 +69,13 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
             );
         }
 
+        public async Task MoveCategoryToTrashAsync(Guid id, DateTime date)
+        {
+            await Task.Run(()
+                => _categories.Find(category => category.Id == id).DeletionDate = date
+            );
+        }
+
         public async Task SetNewFileByIdAsync(Guid id, string filename)
         {
             await Task.Run(()

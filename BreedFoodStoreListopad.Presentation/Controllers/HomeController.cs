@@ -107,5 +107,26 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Переместить категорию в корзину
+        /// </summary>
+        /// <param name="model">Параметры перемещения</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("MoveCategoryToTrash")]
+        public async Task<IActionResult> MoveCategoryToTrashAsync(MoveToTrashViewModel model)
+        {
+            try
+            {
+                await _service.MoveCategoryToTrashAsync(model.Id, model.MoveDate);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

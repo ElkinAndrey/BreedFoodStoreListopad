@@ -15,19 +15,19 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
 
         public async Task AddFile(string path, string contentType, Stream stream)
         {
-            await Task.Run(() =>
+
+            string fullPath = $"{rootFolder}\\{path}";
+
+            Directory.CreateDirectory($"{rootFolder}\\{Path.GetDirectoryName(path)}");
+
+            using (FileStream fileStream = File.Create(fullPath, (int)stream.Length))
             {
-                string fullPath = $"{rootFolder}\\{path}";
-
-                Directory.CreateDirectory($"{rootFolder}\\{Path.GetDirectoryName(path)}");
-
-                using (FileStream fileStream = File.Create(fullPath, (int)stream.Length))
-                {
-                    byte[] data = new byte[stream.Length];
-                    stream.Read(data, 0, (int)data.Length);
-                    fileStream.Write(data, 0, data.Length);
-                }
-            });
+                byte[] data = new byte[stream.Length];
+                var readTask = stream.ReadAsync(data, 0, (int)data.Length);
+                var writeTask = fileStream.WriteAsync(data, 0, data.Length);
+                await readTask;
+                await writeTask;
+            }
         }
 
         public async Task<Stream> GetFileAsync(string path)

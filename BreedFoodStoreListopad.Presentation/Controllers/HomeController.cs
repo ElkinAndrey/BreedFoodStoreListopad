@@ -138,5 +138,27 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        /// <summary>
+        /// Вернуть категорию из списока удаленных категорий
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("ReturnCategoryFromTrash/{id}")]
+        public async Task<IActionResult> ReturnCategoryFromTrashAsync(Guid? id)
+        {
+            TimeStop();
+            try
+            {
+                await _service.ReturnCategoryFromTrashAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

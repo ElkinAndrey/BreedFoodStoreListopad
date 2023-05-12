@@ -50,5 +50,12 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         /// <param name="date">Дата перемещения</param>
         /// <returns></returns>
         public Task MoveCategoryToTrashAsync(Guid? id, DateTime? date);
+
+        /// <summary>
+        /// Вернуть категорию из списока удаленных категорий
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <returns></returns>
+        public Task ReturnCategoryFromTrashAsync(Guid? id);
     }
 }

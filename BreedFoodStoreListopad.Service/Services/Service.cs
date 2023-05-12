@@ -4,6 +4,7 @@ using BreedFoodStoreListopad.Service.Abstractions;
 using BreedFoodStoreListopad.Service.Exceptions;
 using BreedFoodStoreListopad.Service.Features;
 using Microsoft.AspNetCore.Mvc;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BreedFoodStoreListopad.Service.Services
 {
@@ -50,8 +51,12 @@ namespace BreedFoodStoreListopad.Service.Services
             string fileExtension = Path.GetExtension(fileName);
             string newFileName = Guid.NewGuid().ToString() + fileExtension;
             Category category = new Category(name, newFileName);
-            await _manager.Repository.AddCategoryAsync(category);
-            await _manager.ObjectStorage.AddFile(category.FilePath, contentType, stream);
+            var addCategiryTask = _manager.Repository.AddCategoryAsync(category);
+            var addFileTask = _manager.ObjectStorage.AddFile(category.FilePath, contentType, stream);
+            await addCategiryTask;
+            await addFileTask;
+
+            
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length)
@@ -115,10 +120,20 @@ namespace BreedFoodStoreListopad.Service.Services
             if (date == null || date == DateTime.MinValue)
                 throw new EmptyDateException();
 
-            Guid notId = id ?? Guid.Empty;
+            Guid notNullId = id ?? Guid.Empty;
             DateTime notNullDate = date ?? DateTime.Now;
 
-            await _manager.Repository.MoveCategoryToTrashAsync(notId, notNullDate);
+            await _manager.Repository.SetCategoryDeletionDateAsync(notNullId, notNullDate);
+        }
+
+        public async Task ReturnCategoryFromTrashAsync(Guid? id)
+        {
+            if (id == null || id == Guid.Empty)
+                throw new EmptyIdException();
+
+            Guid notNullId = id ?? Guid.Empty;
+
+            await _manager.Repository.SetCategoryDeletionDateAsync(notNullId, null);
         }
     }
 }

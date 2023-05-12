@@ -1,5 +1,6 @@
 ﻿using BreedFoodStoreListopad.Domain.Entities;
 using BreedFoodStoreListopad.Persistence.Abstractions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BreedFoodStoreListopad.Persistence.Repositories
 {
@@ -69,7 +70,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
             );
         }
 
-        public async Task MoveCategoryToTrashAsync(Guid id, DateTime date)
+        public async Task SetCategoryDeletionDateAsync(Guid id, DateTime? date)
         {
             await Task.Run(()
                 => _categories.Find(category => category.Id == id).DeletionDate = date

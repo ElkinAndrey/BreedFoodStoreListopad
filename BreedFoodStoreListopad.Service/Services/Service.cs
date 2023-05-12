@@ -35,6 +35,9 @@ namespace BreedFoodStoreListopad.Service.Services
             if (string.IsNullOrEmpty(name))
                 throw new EmptyNameException();
 
+            if (!name.All(ch => ch != '_'))
+                throw new NameContainsInvalidCharacterException('_');
+
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(contentType) || stream == null || stream.Length == 0)
                 throw new EmptyFileException();
 

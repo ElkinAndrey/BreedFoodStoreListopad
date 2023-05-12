@@ -29,4 +29,9 @@ export default class Service {
             moveDate: date
         });
     }
+
+    static async returnCategoryFromTrash(id) {
+        console.log(id)
+        await axios.post(`${URL}/ReturnCategoryFromTrash/${id}`);
+    }
 }

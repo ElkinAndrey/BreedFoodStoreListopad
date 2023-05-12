@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import classes from "./DeletedCategories.module.css";
 import Header from "./../../layout/Header/Header";
 import Service from "./../../../api/Service";
@@ -6,11 +6,12 @@ import { useFetching } from "./../../../hooks/useFetching";
 import PageFetching from "./../../../views/PageFetching/PageFetching";
 import PaginationBar from "./../../forms/PaginationBar/PaginationBar";
 import DeletedCategory from "../../../views/DeletedCategory/DeletedCategory";
-import Modal from "./../../forms/Modal/Modal";
-import Delete from "./../../../views/Delete/Delete";
-import Restore from "./../../../views/Restore/Restore";
 import ButtonWithImage from "./../../../views/ButtonWithImage/ButtonWithImage";
 import ConfirmationModalWindow from "./../../../views/ConfirmationModalWindow/ConfirmationModalWindow";
+import ButtonDelete from "./../../../views/ButtonDelete/ButtonDelete";
+import { Context } from "./../../../context/context";
+import AddNotification from "./../../../utils/AddNotification";
+import Notification from "../../forms/Notification/Notification";
 
 const DeletedCategories = () => {
   const dataFetchedRef = useRef(false);
@@ -18,13 +19,20 @@ const DeletedCategories = () => {
   const [categories, setCategories] = useState();
   const [modalRestore, setModalRestore] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
-  const [resName, setResName] = useState("");
-  const [delName, setDelName] = useState("");
+  const [res, setRes] = useState();
+  const [del, setDel] = useState();
+  const { notifications, setNotifications } = useContext(Context);
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
     async (start, length) => {
       const response = await Service.getDeletedCategories(start, length);
       setCategories(response.data);
+    }
+  );
+
+  const [fetchReturn, isReturnLoading, returnError] = useFetching(
+    async (id) => {
+      await Service.returnCategoryFromTrash(id);
     }
   );
 
@@ -49,16 +57,40 @@ const DeletedCategories = () => {
         active={modalRestore}
         setActive={setModalRestore}
         logo={"Востановить категорию"}
-        text={`Вы уверены, что хотите востановить категорию "${resName}"?`}
+        text={`Вы уверены, что хотите востановить категорию "${res?.name}"?`}
         borderColor="var(--button-restore)"
         width="380px"
-      ></ConfirmationModalWindow>
+      >
+        <ButtonDelete
+          text="Востановить"
+          loadingText="Востановление"
+          loading={isReturnLoading}
+          onClick={() => {
+            fetchReturn(res.id);
+          }}
+          setModal={setModalRestore}
+          er={returnError}
+          array={categories}
+          setArray={setCategories}
+          color={"var(--button-restore)"}
+          colorActive={"var(--button-restore-active)"}
+          processedElement={res}
+          notifications={notifications}
+          setNotifications={setNotifications}
+          successfulMessage={`Категория "${res?.name}" успешно востановлена`}
+          failedMessage={`Не удалось востановить категорию "${
+            res?.name
+          }" из-за ошибки "${
+            returnError?.response?.data || returnError?.message
+          }"`}
+        />
+      </ConfirmationModalWindow>
 
       <ConfirmationModalWindow
         active={modalDelete}
         setActive={setModalDelete}
         logo={"Полностью удалить категорию"}
-        text={`Вы уверены, что хотите полностью удалить категорию "${delName}"?`}
+        text={`Вы уверены, что хотите полностью удалить категорию "${del?.name}"?`}
         borderColor="var(--button-delete)"
         width="380px"
       ></ConfirmationModalWindow>
@@ -71,7 +103,7 @@ const DeletedCategories = () => {
         >
           {categories?.length === 0 ? (
             <div className={classes.hasNotCategories}>
-              Категории отсутствуют
+              Удаленные категории отсутствуют
             </div>
           ) : (
             <div className={classes.content}>
@@ -81,11 +113,11 @@ const DeletedCategories = () => {
                     <DeletedCategory
                       category={category}
                       onRestore={() => {
-                        setResName(category.name);
+                        setRes(category);
                         setModalRestore(true);
                       }}
                       onDelete={() => {
-                        setDelName(category.name);
+                        setDel(category);
                         setModalDelete(true);
                       }}
                     />

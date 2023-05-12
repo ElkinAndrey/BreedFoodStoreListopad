@@ -73,34 +73,23 @@ const Categories = () => {
           onClick={() => {
             fetchDelete(delCategory.id, new Date());
           }}
-          afterClick={() => {
-            setModal(false);
-            if (Object.keys(deleteError).length === 0 || !deleteError) {
-              setCategories(categories.filter((c) => c.id !== delCategory.id));
-              AddNotification(
-                <Notification borderColor={"var(--button-restore)"}>
-                  <div style={{ fontSize: "22px" }}>
-                    Категория "{delCategory.name}" успешно удалена
-                  </div>
-                </Notification>,
-                notifications,
-                setNotifications
-              );
-            } else {
-              AddNotification(
-                <Notification borderColor={"var(--button-delete)"}>
-                  <div style={{ fontSize: "22px" }}>
-                    Не удалось удалить категорию "{delCategory.name}" из-за
-                    ошибки "
-                    {deleteError?.response?.data || deleteError?.message}"
-                  </div>
-                </Notification>,
-                notifications,
-                setNotifications
-              );
-            }
-          }}
+          setModal={setModal}
+          er={deleteError}
+          array={categories}
+          setArray={setCategories}
+          color={"var(--button-delete)"}
+          colorActive={"var(--button-delete-active)"}
+          processedElement={delCategory}
+          notifications={notifications}
+          setNotifications={setNotifications}
+          successfulMessage={`Категория "${delCategory.name}" успешно удалена`}
+          failedMessage={`Не удалось удалить категорию "${
+            delCategory.name
+          }" из-за
+          ошибки "
+          ${deleteError?.response?.data || deleteError?.message}"`}
         />
+        
       </ConfirmationModalWindow>
 
       <div className={classes.body}>

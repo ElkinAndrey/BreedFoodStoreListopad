@@ -1,26 +1,36 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Category from "./../../../views/Category/Category";
 import Header from "./../../layout/Header/Header";
 import classes from "./Categories.module.css";
 import ButtonWithImage from "../../../views/ButtonWithImage/ButtonWithImage";
-import Modal from "../../forms/Modal/Modal";
-import Delete from "../../../views/Delete/Delete";
 import { useFetching } from "./../../../hooks/useFetching";
 import Service from "../../../api/Service";
 import PageFetching from "./../../../views/PageFetching/PageFetching";
 import PaginationBar from "../../forms/PaginationBar/PaginationBar";
+import ConfirmationModalWindow from "./../../../views/ConfirmationModalWindow/ConfirmationModalWindow";
+import ButtonDelete from "./../../../views/ButtonDelete/ButtonDelete";
+import { Context } from "./../../../context/context";
+import Notification from "../../forms/Notification/Notification";
+import AddNotification from "./../../../utils/AddNotification";
 
 const Categories = () => {
   const dataFetchedRef = useRef(false);
   const [paginationPage, setPaginationPage] = useState(1);
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState();
-  const [delName, setDelName] = useState("");
+  const [delCategory, setDelCategory] = useState("");
+  const { notifications, setNotifications } = useContext(Context);
 
   const [fetchCategories, isCategoriesLoading, categoriesError] = useFetching(
     async (start, length) => {
       const response = await Service.getCategories(start, length);
       setCategories(response.data);
+    }
+  );
+
+  const [fetchDelete, isDeleteLoading, deleteError] = useFetching(
+    async (id, date) => {
+      await Service.moveCategoryToTrash(id, date);
     }
   );
 
@@ -47,26 +57,51 @@ const Categories = () => {
           />
         </div>
       </Header>
-      <Modal
+
+      <ConfirmationModalWindow
         active={modal}
         setActive={setModal}
-        style={{
-          borderRadius: "10px",
-          padding: "20px",
-          width: "380px",
-          border: "3px solid var(--button-delete)",
-        }}
+        logo={"Удаление категории"}
+        text={`Вы уверены, что хотите удалить категорию "${delCategory.name}"?`}
+        borderColor="var(--button-delete)"
+        width="380px"
       >
-        <Delete
-          logo={"Удаление категории"}
-          text={`Вы уверены, что хотите удалить категорию "${delName}"?`}
-          deleteAction={() => {
-            console.log("Успешно удалено");
-            setModal(false);
+        <ButtonDelete
+          text="Удалить"
+          loadingText="Удаление"
+          loading={isDeleteLoading}
+          onClick={() => {
+            fetchDelete(delCategory.id, new Date());
           }}
-          backAction={() => setModal(false)}
+          afterClick={() => {
+            setModal(false);
+            if (Object.keys(deleteError).length === 0 || !deleteError) {
+              setCategories(categories.filter((c) => c.id !== delCategory.id));
+              AddNotification(
+                <Notification borderColor={"var(--button-restore)"}>
+                  <div style={{ fontSize: "22px" }}>
+                    Категория "{delCategory.name}" успешно удалена
+                  </div>
+                </Notification>,
+                notifications,
+                setNotifications
+              );
+            } else {
+              AddNotification(
+                <Notification borderColor={"var(--button-delete)"}>
+                  <div style={{ fontSize: "22px" }}>
+                    Не удалось удалить категорию "{delCategory.name}" из-за
+                    ошибки "
+                    {deleteError?.response?.data || deleteError?.message}"
+                  </div>
+                </Notification>,
+                notifications,
+                setNotifications
+              );
+            }
+          }}
         />
-      </Modal>
+      </ConfirmationModalWindow>
 
       <div className={classes.body}>
         <PageFetching
@@ -86,7 +121,7 @@ const Categories = () => {
                     <Category
                       category={category}
                       onClickDelete={() => {
-                        setDelName(category.name);
+                        setDelCategory(category);
                         setModal(true);
                       }}
                     />

@@ -8,7 +8,7 @@ const DeletedCategory = ({ category, onDelete, onRestore }) => {
   return (
     <div className={classes.body}>
       <Link
-        to={`/изменить_категорию/${category.name}`}
+        to={`/изменить_категорию/${category.name.replaceAll(" ", "_")}`}
         className={classes.text}
       >
         <div className={classes.name}>{category.name}</div>
@@ -16,7 +16,7 @@ const DeletedCategory = ({ category, onDelete, onRestore }) => {
           Дата удаления {GetDate.DateToString(category.deletionDate)}
         </div>
       </Link>
-      <Link to={`/изменить_категорию/${category.name}`}>
+      <Link to={`/изменить_категорию/${category.name.replaceAll(" ", "_")}`}>
         <img
           className={classes.image}
           src={Service.fullFilePath(category.filePath)}
@@ -28,7 +28,7 @@ const DeletedCategory = ({ category, onDelete, onRestore }) => {
           Вернуть
         </button>
         <Link
-          to={`/изменить_категорию/${category.name}`}
+          to={`/изменить_категорию/${category.name.replaceAll(" ", "_")}`}
           className={classes.buttonlink}
         ></Link>
         <button className={classes.del + " " + classes.button} onClick={onDelete}>

@@ -18,6 +18,11 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
             _service = service;
         }
 
+        private void TimeStop()
+        {
+            Thread.Sleep(1000);
+        }
+
         /// <summary>
         /// Добавление новой категории
         /// </summary>
@@ -27,6 +32,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
 		[Route("AddCategory")]
 		public async Task<IActionResult> AddCategoryAsync([FromForm]AddCategoryViewModel model)
 		{
+            TimeStop();
             try
             {
                 await _service.AddCategoryAsync(
@@ -52,6 +58,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         [Route("GetCategories")]
         public async Task<IActionResult> GetCategoriesAsync(GetCategoriesViewModel model)
         {
+            TimeStop();
             try
             {
                 var categories =  await _service.GetCategoriesAsync(model.Start, model.Length);
@@ -73,6 +80,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         [Route("GetCategoriesInTrash")]
         public async Task<IActionResult> GetCategoriesInTrashAsync(GetCategoriesViewModel model)
         {
+            TimeStop();
             try
             {
                 var categories = await _service.GetCategoriesInTrashAsync(model.Start, model.Length);
@@ -96,6 +104,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         [Route("GetImage/{folder}/{name}/{file}")]
         public async Task<IActionResult> GetImageAsync(string folder, string name, string file)
         {
+            TimeStop();
             try
             {
                 var image =  await _service.GetImageAsync($"{folder}/{name}/{file}", File);
@@ -113,10 +122,11 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         /// </summary>
         /// <param name="model">Параметры перемещения</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpPost]
         [Route("MoveCategoryToTrash")]
         public async Task<IActionResult> MoveCategoryToTrashAsync(MoveToTrashViewModel model)
         {
+            TimeStop();
             try
             {
                 await _service.MoveCategoryToTrashAsync(model.Id, model.MoveDate);

@@ -1,10 +1,15 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { routes } from './../routes';
+import React, { useContext } from "react";
+import { Route, Routes } from "react-router-dom";
+import { routes } from "./../routes";
+import Notifications from "../../components/layout/Notifications/Notifications";
+import { Context } from "../../context/context";
 
 const AppRouter = () => {
-  return (<div>
+  const { notifications, setNotifications } = useContext(Context);
+
+  return (
     <div>
+      <Notifications notifications={notifications} />
       <Routes path="/">
         {routes.map((rout) => (
           <Route
@@ -16,8 +21,7 @@ const AppRouter = () => {
         ))}
       </Routes>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;

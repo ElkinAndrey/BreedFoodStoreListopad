@@ -1,0 +1,8 @@
+.button {
+  padding: 10px 15px;
+  border: 0px;
+  border-radius: 10px;
+  font-size: 22px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}

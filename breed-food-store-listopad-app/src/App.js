@@ -1,15 +1,18 @@
-import { React } from "react";
+import { React, useState } from "react";
 import "./App.css";
-import Categories from './components/pages/Categories/Categories';
 import { BrowserRouter } from "react-router-dom";
 import AppRouter from './router/AppRouter/AppRouter';
+import { Context } from './context/context';
 
 function App() {
+    const [notifications, setNotifications] = useState([])
     return (
         <div>
-            <BrowserRouter>
-                <AppRouter />
-            </BrowserRouter>
+            <Context.Provider value={{ notifications: notifications, setNotifications: setNotifications }}>
+                <BrowserRouter>
+                    <AppRouter />
+                </BrowserRouter>
+            </Context.Provider>
         </div>
     );
 }

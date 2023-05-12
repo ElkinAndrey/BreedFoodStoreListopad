@@ -1,0 +1,25 @@
+.button {
+  background-color: var(--button-delete);
+}
+
+.button:hover {
+  background-color: var(--button-delete-active);
+}
+
+.loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  color: var(--button-delete);
+}
+
+.loader {
+  margin-right: 10px;
+}
+
+.button:disabled {
+  color: black;
+  cursor: default;
+  background-color: var(--button-delete-active);
+}

@@ -10,6 +10,7 @@ import Modal from "./../../forms/Modal/Modal";
 import Delete from "./../../../views/Delete/Delete";
 import Restore from "./../../../views/Restore/Restore";
 import ButtonWithImage from "./../../../views/ButtonWithImage/ButtonWithImage";
+import ConfirmationModalWindow from "./../../../views/ConfirmationModalWindow/ConfirmationModalWindow";
 
 const DeletedCategories = () => {
   const dataFetchedRef = useRef(false);
@@ -44,47 +45,23 @@ const DeletedCategories = () => {
         </div>
       </Header>
 
-      <Modal
+      <ConfirmationModalWindow
         active={modalRestore}
         setActive={setModalRestore}
-        style={{
-          borderRadius: "10px",
-          padding: "20px",
-          width: "380px",
-          border: "3px solid var(--button-restore)",
-        }}
-      >
-        <Restore
-          logo={"Востановить категорию"}
-          text={`Вы уверены, что хотите востановить категорию "${resName}"?`}
-          restoreAction={() => {
-            console.log("Категория была востановлена");
-            setModalRestore(false);
-          }}
-          backAction={() => setModalRestore(false)}
-        />
-      </Modal>
+        logo={"Востановить категорию"}
+        text={`Вы уверены, что хотите востановить категорию "${resName}"?`}
+        borderColor="var(--button-restore)"
+        width="380px"
+      ></ConfirmationModalWindow>
 
-      <Modal
+      <ConfirmationModalWindow
         active={modalDelete}
         setActive={setModalDelete}
-        style={{
-          borderRadius: "10px",
-          padding: "20px",
-          width: "380px",
-          border: "3px solid var(--button-delete)",
-        }}
-      >
-        <Delete
-          logo={"Полностью удалить категорию"}
-          text={`Вы уверены, что хотите полностью удалить категорию "${delName}"?`}
-          deleteAction={() => {
-            console.log("Категория была полностью удалена");
-            setModalDelete(false);
-          }}
-          backAction={() => setModalDelete(false)}
-        />
-      </Modal>
+        logo={"Полностью удалить категорию"}
+        text={`Вы уверены, что хотите полностью удалить категорию "${delName}"?`}
+        borderColor="var(--button-delete)"
+        width="380px"
+      ></ConfirmationModalWindow>
 
       <div className={classes.body}>
         <PageFetching

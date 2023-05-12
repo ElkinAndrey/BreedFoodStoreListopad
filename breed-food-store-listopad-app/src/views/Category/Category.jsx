@@ -22,7 +22,7 @@ const Category = ({ category, onClickDelete }) => {
               Изменить
             </Link>
             <button className={classes.button_delete} onClick={onClickDelete}>
-              <img src="/images/trash.png  " alt="" />
+              <img src="/images/trash.png" alt="" />
             </button>
           </div>
         </div>

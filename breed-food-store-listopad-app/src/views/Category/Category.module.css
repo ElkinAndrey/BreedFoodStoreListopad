@@ -82,6 +82,7 @@
   height: 220px;
   border-radius: 10px;
   margin-bottom: -3px;
+  background-color: var(--element-active);
 }
 
 .button_update {

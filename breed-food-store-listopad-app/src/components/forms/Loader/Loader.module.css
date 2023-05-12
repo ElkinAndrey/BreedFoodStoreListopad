@@ -14,7 +14,6 @@
   user-select: none;
   font-size: 40px;
   margin: 0px;
-  color: var(--button);
   font-weight: 900;
 }
 
@@ -26,8 +25,6 @@
 
 .spinner {
   margin: 0px;
-  width: 65px;
-  height: 65px;
   animation: rotator var(--speed) linear infinite;
 }
 
@@ -43,7 +40,6 @@
   stroke-dasharray: var(--stroke);
   stroke-dashoffset: 0;
   transform-origin: center;
-  stroke: var(--button);
   animation: dash var(--speed) ease-in-out infinite;
 }
 

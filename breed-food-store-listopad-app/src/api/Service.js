@@ -22,4 +22,11 @@ export default class Service {
         });
         return response;
     }
+
+    static async moveCategoryToTrash(id, date) {
+        await axios.post(`${URL}/MoveCategoryToTrash`, {
+            id: id,
+            moveDate: date
+        });
+    }
 }

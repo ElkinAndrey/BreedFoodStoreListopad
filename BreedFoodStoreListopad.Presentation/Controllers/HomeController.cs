@@ -9,7 +9,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
 	public class HomeController : ControllerBase
 	{
 		/// <summary>
-		/// Сервис для работы с приложением
+		/// РЎРµСЂРІРёСЃ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РїСЂРёР»РѕР¶РµРЅРёРµРј
 		/// </summary>
 		private IService _service;
 
@@ -24,9 +24,9 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
-        /// Добавление новой категории
+        /// Р”РѕР±Р°РІР»РµРЅРёРµ РЅРѕРІРѕР№ РєР°С‚РµРіРѕСЂРёРё
         /// </summary>
-        /// <param name="model">Параметры добавления</param>
+        /// <param name="model">РџР°СЂР°РјРµС‚СЂС‹ РґРѕР±Р°РІР»РµРЅРёСЏ</param>
         /// <returns></returns>
         [HttpPost]
 		[Route("AddCategory")]
@@ -50,10 +50,10 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
 		}
 
         /// <summary>
-        /// Получить срез категорий
+        /// РџРѕР»СѓС‡РёС‚СЊ СЃСЂРµР· РєР°С‚РµРіРѕСЂРёР№
         /// </summary>
-        /// <param name="model">Параметры среза</param>
-        /// <returns>Категории</returns>
+        /// <param name="model">РџР°СЂР°РјРµС‚СЂС‹ СЃСЂРµР·Р°</param>
+        /// <returns>РљР°С‚РµРіРѕСЂРёРё</returns>
         [HttpPost]
         [Route("GetCategories")]
         public async Task<IActionResult> GetCategoriesAsync(GetCategoriesViewModel model)
@@ -72,10 +72,10 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
-        /// Получить срез удаленных категорий
+        /// РџРѕР»СѓС‡РёС‚СЊ СЃСЂРµР· СѓРґР°Р»РµРЅРЅС‹С… РєР°С‚РµРіРѕСЂРёР№
         /// </summary>
-        /// <param name="model">Параметры среза</param>
-        /// <returns>Удаленные категории</returns>
+        /// <param name="model">РџР°СЂР°РјРµС‚СЂС‹ СЃСЂРµР·Р°</param>
+        /// <returns>РЈРґР°Р»РµРЅРЅС‹Рµ РєР°С‚РµРіРѕСЂРёРё</returns>
         [HttpPost]
         [Route("GetCategoriesInTrash")]
         public async Task<IActionResult> GetCategoriesInTrashAsync(GetCategoriesViewModel model)
@@ -94,11 +94,11 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
-        /// Получить картинку по пути
+        /// РџРѕР»СѓС‡РёС‚СЊ РєР°СЂС‚РёРЅРєСѓ РїРѕ РїСѓС‚Рё
         /// </summary>
-        /// <param name="folder">Папка</param>
-        /// <param name="name">Имя</param>
-        /// <param name="file">Название картинки</param>
+        /// <param name="folder">РџР°РїРєР°</param>
+        /// <param name="name">РРјСЏ</param>
+        /// <param name="file">РќР°Р·РІР°РЅРёРµ РєР°СЂС‚РёРЅРєРё</param>
         /// <returns></returns>
         [HttpGet]
         [Route("GetImage/{folder}/{name}/{file}")]
@@ -118,9 +118,9 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
-        /// Переместить категорию в корзину
+        /// РџРµСЂРµРјРµСЃС‚РёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ РІ РєРѕСЂР·РёРЅСѓ
         /// </summary>
-        /// <param name="model">Параметры перемещения</param>
+        /// <param name="model">РџР°СЂР°РјРµС‚СЂС‹ РїРµСЂРµРјРµС‰РµРЅРёСЏ</param>
         /// <returns></returns>
         [HttpPost]
         [Route("MoveCategoryToTrash")]
@@ -140,9 +140,9 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         }
 
         /// <summary>
-        /// Вернуть категорию из списока удаленных категорий
+        /// Р’РµСЂРЅСѓС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ РёР· СЃРїРёСЃРѕРєР° СѓРґР°Р»РµРЅРЅС‹С… РєР°С‚РµРіРѕСЂРёР№
         /// </summary>
-        /// <param name="id">Id категории</param>
+        /// <param name="id">Id РєР°С‚РµРіРѕСЂРёРё</param>
         /// <returns></returns>
         [HttpPost]
         [Route("ReturnCategoryFromTrash/{id}")]

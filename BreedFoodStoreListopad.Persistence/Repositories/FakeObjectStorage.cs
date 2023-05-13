@@ -1,5 +1,6 @@
 ﻿using BreedFoodStoreListopad.Persistence.Abstractions;
 using BreedFoodStoreListopad.Persistence.Exceptions;
+using System.IO;
 
 namespace BreedFoodStoreListopad.Persistence.Repositories
 {
@@ -13,7 +14,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
         /// </summary>
         private readonly string rootFolder = "FakeObjectStorageFiles";
 
-        public async Task AddFile(string path, string contentType, Stream stream)
+        public async Task AddFileAsync(string path, string contentType, Stream stream)
         {
 
             string fullPath = $"{rootFolder}\\{path}";
@@ -28,6 +29,11 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
                 await readTask;
                 await writeTask;
             }
+        }
+
+        public async Task DeleteFolderAsync(string folderPath)
+        {
+            await Task.Run(() => Directory.Delete($"{rootFolder}\\{folderPath}", true));
         }
 
         public async Task<Stream> GetFileAsync(string path)

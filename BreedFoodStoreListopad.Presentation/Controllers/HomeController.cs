@@ -122,7 +122,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         /// </summary>
         /// <param name="model">Параметры перемещения</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [Route("MoveCategoryToTrash")]
         public async Task<IActionResult> MoveCategoryToTrashAsync(MoveToTrashViewModel model)
         {
@@ -144,7 +144,7 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
         /// </summary>
         /// <param name="id">Id категории</param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [Route("ReturnCategoryFromTrash/{id}")]
         public async Task<IActionResult> ReturnCategoryFromTrashAsync(Guid? id)
         {
@@ -152,6 +152,28 @@ namespace BreedFoodStoreListopad.Presentation.Controllers
             try
             {
                 await _service.ReturnCategoryFromTrashAsync(id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Полностью удалить категорию
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <returns></returns>
+        [HttpDelete]
+        [Route("FullyDeleteCategory/{id}")]
+        public async Task<IActionResult> FullyDeleteCategoryAsync(Guid? id)
+        {
+            TimeStop();
+            try
+            {
+                await _service.FullyDeleteCategoryAsync(id);
 
                 return Ok();
             }

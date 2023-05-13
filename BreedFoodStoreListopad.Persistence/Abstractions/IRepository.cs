@@ -97,5 +97,12 @@ namespace BreedFoodStoreListopad.Persistence.Abstractions
         /// <param name="date">Дата перемещения</param>
         /// <returns></returns>
         public Task SetCategoryDeletionDateAsync(Guid id, DateTime? date);
+
+        /// <summary>
+        /// Полностью удалить категорию
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <returns>Удаленная категория</returns>
+        public Task<Category> FullyDeleteCategoryAsync(Guid id);
     }
 }

@@ -22,10 +22,21 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
 
         public async Task DeleteCategoryByIdAsync(Guid id)
         {
-            await Task.Run(() 
+            await Task.Run(()
                 => _categories = _categories
                     .Where(category => category.Id != id)
                     .ToList()
+            );
+        }
+
+        public async Task<Category> FullyDeleteCategoryAsync(Guid id)
+        {
+            return await Task.Run(() =>
+                {
+                    Category removeCcategory = _categories.Where(category => category.Id == id).First();
+                    _categories.Remove(removeCcategory);
+                    return removeCcategory;
+                }
             );
         }
 
@@ -89,7 +100,7 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
         {
             await Task.Run(()
                 => _categories.Find(category => category.Id == id).Name = name
-            );            
+            );
         }
 
         public async Task SetOldFileNameByIdAsync(Guid id, int index)

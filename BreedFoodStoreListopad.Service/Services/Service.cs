@@ -52,11 +52,23 @@ namespace BreedFoodStoreListopad.Service.Services
             string newFileName = Guid.NewGuid().ToString() + fileExtension;
             Category category = new Category(name, newFileName);
             var addCategiryTask = _manager.Repository.AddCategoryAsync(category);
-            var addFileTask = _manager.ObjectStorage.AddFile(category.FilePath, contentType, stream);
+            var addFileTask = _manager.ObjectStorage.AddFileAsync(category.FilePath, contentType, stream);
             await addCategiryTask;
             await addFileTask;
 
             
+        }
+
+        public async Task FullyDeleteCategoryAsync(Guid? id)
+        {
+            if (id == null || id == Guid.Empty)
+                throw new EmptyIdException();
+
+            Guid notNullId = id ?? Guid.Empty;
+
+            var removeCcategory = await _manager.Repository.FullyDeleteCategoryAsync(notNullId);
+            await _manager.ObjectStorage.DeleteFolderAsync(removeCcategory.FolderPath);
+
         }
 
         public async Task<IEnumerable<Category>> GetCategoriesAsync(int? start, int? length)

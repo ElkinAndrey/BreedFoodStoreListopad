@@ -29,7 +29,7 @@ html body {
   --gray-text: #bebebe;
 }
 
-img {
+.skeletonImage {
   --max-color: rgba(0, 0, 0, 0.1);
   --min-color: rgba(0, 0, 0, 0.04);
   animation: skeleton 2s infinite ease-in-out;

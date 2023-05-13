@@ -57,5 +57,12 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         /// <param name="id">Id категории</param>
         /// <returns></returns>
         public Task ReturnCategoryFromTrashAsync(Guid? id);
+
+        /// <summary>
+        /// Полностью удалить категорию
+        /// </summary>
+        /// <param name="id">Id категории</param>
+        /// <returns></returns>
+        public Task FullyDeleteCategoryAsync(Guid? id);
     }
 }

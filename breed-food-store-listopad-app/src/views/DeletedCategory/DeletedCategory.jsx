@@ -18,7 +18,7 @@ const DeletedCategory = ({ category, onDelete, onRestore }) => {
       </Link>
       <Link to={`/изменить_категорию/${category.name.replaceAll(" ", "_")}`}>
         <img
-          className={classes.image}
+          className={classes.image + " skeletonImage"}
           src={Service.fullFilePath(category.filePath)}
           alt=""
         />

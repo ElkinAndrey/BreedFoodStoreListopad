@@ -10,7 +10,7 @@ const Category = ({ category, onClickDelete }) => {
         <div className={classes.category_content}>
           <div className={classes.logo}>{category.name}</div>
           <img
-            className={classes.image}
+            className={classes.image + " skeletonImage"}
             src={Service.fullFilePath(category.filePath)}
             alt=""
           />

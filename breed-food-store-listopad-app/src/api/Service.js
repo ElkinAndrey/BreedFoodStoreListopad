@@ -24,7 +24,7 @@ export default class Service {
     }
 
     static async moveCategoryToTrash(id, date) {
-        await axios.post(`${URL}/MoveCategoryToTrash`, {
+        await axios.put(`${URL}/MoveCategoryToTrash`, {
             id: id,
             moveDate: date
         });
@@ -32,6 +32,6 @@ export default class Service {
 
     static async returnCategoryFromTrash(id) {
         console.log(id)
-        await axios.post(`${URL}/ReturnCategoryFromTrash/${id}`);
+        await axios.put(`${URL}/ReturnCategoryFromTrash/${id}`);
     }
 }

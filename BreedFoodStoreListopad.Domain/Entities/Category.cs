@@ -78,12 +78,17 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		/// <summary>
 		/// Полный путь к картинке категории
 		/// </summary>
-		public string FilePath { get => $"{ImagesFolder}/{Id}/{FileName}"; }
+		public string FilePath { get => $"{FolderPath}/{FileName}"; }
 
-		/// <summary>
-		/// Если объект в мусорной корзине, то true.
-		/// </summary>
-		public DateTime? DeletionDate { get; set; } = null;
+        /// <summary>
+        /// Полный путь к папке с картинками 
+        /// </summary>
+        public string FolderPath { get => $"{ImagesFolder}/{Id}"; }
+
+        /// <summary>
+        /// Если объект в мусорной корзине, то true.
+        /// </summary>
+        public DateTime? DeletionDate { get; set; } = null;
 
         /// <summary>
         /// Категория товара

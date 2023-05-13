@@ -36,6 +36,12 @@ const DeletedCategories = () => {
     }
   );
 
+  const [fetchDelete, isDeleteLoading, deleteError] = useFetching(
+    async (id) => {
+      await Service.fullyDeleteCategory(id);
+    }
+  );
+
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
@@ -93,7 +99,29 @@ const DeletedCategories = () => {
         text={`Вы уверены, что хотите полностью удалить категорию "${del?.name}"?`}
         borderColor="var(--button-delete)"
         width="380px"
-      ></ConfirmationModalWindow>
+      >
+        <ButtonDelete
+          text="Удалить"
+          loadingText="Удаление"
+          loading={isDeleteLoading}
+          onClick={() => {
+            fetchDelete(del.id, new Date());
+          }}
+          setModal={setModalDelete}
+          er={deleteError}
+          array={categories}
+          setArray={setCategories}
+          color={"var(--button-delete)"}
+          colorActive={"var(--button-delete-active)"}
+          processedElement={del}
+          notifications={notifications}
+          setNotifications={setNotifications}
+          successfulMessage={`Категория "${del?.name}" успешно удалена`}
+          failedMessage={`Не удалось удалить категорию "${del?.name}" из-за
+      ошибки "
+      ${deleteError?.response?.data || deleteError?.message}"`}
+        />
+      </ConfirmationModalWindow>
 
       <div className={classes.body}>
         <PageFetching

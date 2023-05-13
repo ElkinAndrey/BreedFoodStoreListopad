@@ -31,7 +31,10 @@ export default class Service {
     }
 
     static async returnCategoryFromTrash(id) {
-        console.log(id)
         await axios.put(`${URL}/ReturnCategoryFromTrash/${id}`);
+    }
+
+    static async fullyDeleteCategory(id) {
+        await axios.delete(`${URL}/FullyDeleteCategory/${id}`);
     }
 }

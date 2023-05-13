@@ -82,14 +82,12 @@ const Categories = () => {
           processedElement={delCategory}
           notifications={notifications}
           setNotifications={setNotifications}
-          successfulMessage={`Категория "${delCategory.name}" успешно удалена`}
-          failedMessage={`Не удалось удалить категорию "${
+          successfulMessage={`Категория "${delCategory.name}" успешно перемещена в корзину`}
+          failedMessage={`Не удалось переместить категорию "${
             delCategory.name
-          }" из-за
-          ошибки "
+          }" в корзину из-за ошибки "
           ${deleteError?.response?.data || deleteError?.message}"`}
         />
-        
       </ConfirmationModalWindow>
 
       <div className={classes.body}>

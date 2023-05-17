@@ -47,3 +47,8 @@ html body {
     background-color: var(--max-color);
   }
 }
+
+img {
+  border: 0px;
+  outline: 0px;
+}

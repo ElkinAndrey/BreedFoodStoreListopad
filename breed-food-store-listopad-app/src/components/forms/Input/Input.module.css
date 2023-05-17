@@ -1,0 +1,23 @@
+.body {
+  display: inline-block;
+  padding: 10px 15px;
+  cursor: text;
+  outline: 2px var(--element) solid;
+  transition: outline 0.1s ease-in-out;
+  border-radius: 5px;
+}
+
+.input {
+  border: 0px;
+  outline: none;
+  font-size: 18px;
+  width: 100%;
+}
+
+.input:focus {
+  border: 0px;
+}
+
+.input__active {
+  outline: 3px var(--button) solid;
+}

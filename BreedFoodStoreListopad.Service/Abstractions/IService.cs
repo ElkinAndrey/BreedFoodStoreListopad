@@ -17,7 +17,7 @@ namespace BreedFoodStoreListopad.Service.Abstractions
         /// <param name="contentType">MIME тип файла. Например, "image/png"</param>
         /// <param name="stream">Стрим, который будет записан в файл</param>
         /// <returns></returns>
-        public Task AddCategoryAsync(string name, string fileName, string contentType, Stream stream);
+        public Task AddCategoryAsync(string? name, string? fileName, string? contentType, Stream? stream);
 
         /// <summary>
         /// Получить срез продуктовых категорий

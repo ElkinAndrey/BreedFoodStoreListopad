@@ -37,4 +37,11 @@ export default class Service {
     static async fullyDeleteCategory(id) {
         await axios.delete(`${URL}/FullyDeleteCategory/${id}`);
     }
+
+    static async addCategory(name, file) {
+        let formData = new FormData();
+        formData.append("file", file);
+        formData.append("name", name);
+        await axios.post(`${URL}/AddCategory`, formData);
+    }
 }

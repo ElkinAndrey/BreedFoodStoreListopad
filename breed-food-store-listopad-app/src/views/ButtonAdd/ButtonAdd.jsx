@@ -1,21 +1,18 @@
 import React, { useEffect, useState } from "react";
-import classes from "./ButtonDelete.module.css";
+import classes from "./ButtonAdd.module.css";
 import Button from "./../../components/forms/Button/Button";
 import Loader from "./../../components/forms/Loader/Loader";
 import AddNotification from "./../../utils/AddNotification";
 import Notification from "../../components/forms/Notification/Notification";
-const ButtonDelete = ({
+const ButtonAdd = ({
   text,
   loadingText,
   loading,
+  error,
   onClick,
-  setModal,
-  er,
-  array,
-  setArray,
+  actionsAfter,
   color,
   colorActive,
-  processedElement,
   notifications,
   setNotifications,
   successfulMessage,
@@ -39,9 +36,8 @@ const ButtonDelete = ({
 
     if (subloading && !loading) {
       setSubloading(false);
-      setModal(false);
-      if (Object.keys(er).length === 0 || !er) {
-        setArray(array.filter((c) => c.id !== processedElement?.id));
+      actionsAfter();
+      if (Object.keys(error).length === 0 || !error) {
         AddNotification(
           <Notification borderColor={"var(--button-restore)"}>
             <div
@@ -110,4 +106,4 @@ const ButtonDelete = ({
   );
 };
 
-export default ButtonDelete;
+export default ButtonAdd;

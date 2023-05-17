@@ -1,0 +1,28 @@
+.first {
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  pointer-events: auto;
+}
+
+.second {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: auto;
+}
+
+.third {
+  margin: 3vw 0px;
+  position: relative;
+  max-width: 90vw;
+}

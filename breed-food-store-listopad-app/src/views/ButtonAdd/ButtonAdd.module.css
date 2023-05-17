@@ -1,0 +1,17 @@
+.loading {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+  }
+  
+  .loader {
+    margin-right: 10px;
+  }
+  
+  .button:disabled {
+    color: black;
+    cursor: default;
+    background-color: var(--button-delete-active);
+  }
+  

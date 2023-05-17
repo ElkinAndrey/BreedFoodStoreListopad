@@ -31,13 +31,17 @@ namespace BreedFoodStoreListopad.Service.Services
             _manager = manager;
         }
 
-        public async Task AddCategoryAsync(string name, string fileName, string contentType, Stream stream)
+        public async Task AddCategoryAsync(string? name, string? fileName, string? contentType, Stream? stream)
         {
             if (string.IsNullOrEmpty(name))
                 throw new EmptyNameException();
 
             if (!name.All(ch => ch != '_'))
                 throw new NameContainsInvalidCharacterException('_');
+
+            int expectedLength = 22;
+            if (name.Length > expectedLength)
+                throw new NameTooLongException(expectedLength, name.Length);
 
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(contentType) || stream == null || stream.Length == 0)
                 throw new EmptyFileException();

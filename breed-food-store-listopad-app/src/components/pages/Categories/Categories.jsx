@@ -106,7 +106,12 @@ const Categories = () => {
                 {categories?.map((category) => (
                   <div key={category.id} className={classes.category}>
                     <Category
-                      category={category}
+                      name={category.name}
+                      filePath={Service.fullFilePath(category.filePath)}
+                      to={`/изменить_категорию/${category.name.replaceAll(
+                        " ",
+                        "_"
+                      )}`}
                       onClickDelete={() => {
                         setDelCategory(category);
                         setModal(true);

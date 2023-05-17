@@ -11,7 +11,7 @@ namespace BreedFoodStoreListopad.Service.Exceptions
         /// </summary>
         /// <param name="ch">Недопустимый символ</param>
         public NameContainsInvalidCharacterException(char ch) :
-            base($"Имя содержит недопустимый символ \"{ch}\"")
+            base($"Имя содержит недопустимый символ '{ch}'")
         {
 
         }

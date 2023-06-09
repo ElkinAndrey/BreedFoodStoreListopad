@@ -120,13 +120,13 @@ const Categories = () => {
                   </div>
                 ))}
               </div>
-              <PaginationBar
+              {/* <PaginationBar
                 className={classes.paginationBar}
                 start={1}
                 end={13}
                 page={paginationPage}
                 setPage={setPaginationPage}
-              />
+              /> */}
             </div>
           )}
         </PageFetching>

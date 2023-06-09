@@ -1,9 +1,4 @@
 ﻿using BreedFoodStoreListopad.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BreedFoodStoreListopad.Persistence.Repositories
 {
@@ -16,8 +11,42 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
                 Id = new Guid("8ac303a0-6d9a-4c63-b916-305f7041fc95"),
                 Name = "Полезные злаки и крупы",
                 FileName = "Test1.jpg",
-                OldNames = new List<string> { "Test2", "Test3", "Test4", "Test5" },
-                OldFileNames = new List<string> { "Test2.jpg", "Test3.jpg" }
+                OldNames = new List<OldName>
+                {
+                    new OldName
+                    {
+                        Name = "Test2",
+                        RemovalDate = new DateTime(23, 5, 12)
+                    },
+                    new OldName
+                    {
+                        Name = "Test3",
+                        RemovalDate = new DateTime(23, 5, 10)
+                    },
+                    new OldName
+                    {
+                        Name = "Test4",
+                        RemovalDate = new DateTime(23, 5, 4)
+                    },
+                    new OldName
+                    {
+                        Name = "Test5",
+                        RemovalDate = new DateTime(23, 4, 1)
+                    },
+                },
+                OldFileNames = new List<OldName> 
+                { 
+                    new OldName
+                    {
+                        Name = "Test2.jpg",
+                        RemovalDate = new DateTime(23, 4, 1)
+                    },
+                    new OldName
+                    {
+                        Name = "Test3.jpg",
+                        RemovalDate = new DateTime(23, 4, 1)
+                    }
+                }
             },
             new Category()
             {
@@ -38,8 +67,27 @@ namespace BreedFoodStoreListopad.Persistence.Repositories
                 Id = new Guid("53a760b4-6c56-43d2-acb2-5ed9e0987ad8"),
                 Name = "Напитки",
                 FileName = "Example1.jpg",
-                OldNames = new List<string> { "Example2", "Example3" },
-                OldFileNames = new List<string> { "Example2.jpg", "Example3.jpg", "Example4.jpg" }
+                OldNames = new List<OldName>
+                {
+                    new OldName
+                    {
+                        Name = "Example2",
+                        RemovalDate = new DateTime(23, 5, 14)
+                    },
+                    new OldName
+                    {
+                        Name = "Example3",
+                        RemovalDate = new DateTime(23, 5, 13)
+                    },
+                },
+                OldFileNames = new List<OldName>
+                {
+                    new OldName
+                    {
+                        Name = "Example2.jpg",
+                        RemovalDate = new DateTime(23, 5, 2)
+                    },
+                }
             },
             new Category()
             {

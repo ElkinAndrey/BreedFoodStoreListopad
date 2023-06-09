@@ -41,7 +41,11 @@ namespace BreedFoodStoreListopad.Domain.Entities
 			set
 			{
 				if (name is not null)
-					OldNames.Add(name);
+					OldNames.Add(new OldName
+					{
+						Name = name,
+						RemovalDate = DateTime.Now,
+					});
 				name = value;
 			}
 		}
@@ -49,7 +53,7 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		/// <summary>
 		/// Старые названия категории
 		/// </summary>
-		public List<string> OldNames { get; set; } = new List<string>();
+		public List<OldName> OldNames { get; set; } = new List<OldName>();
 
 		/// <summary>
 		/// Название картинки категории
@@ -65,7 +69,11 @@ namespace BreedFoodStoreListopad.Domain.Entities
 			set
 			{
 				if (fileName is not null)
-					OldFileNames.Add(fileName);
+					OldFileNames.Add(new OldName
+					{
+						Name = fileName,
+						RemovalDate = DateTime.Now,						
+					});
 				fileName = value;
 			}
 		}
@@ -73,7 +81,7 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		/// <summary>
 		/// Старые названия картинок категории
 		/// </summary>
-		public List<string> OldFileNames { get; set; } = new List<string>();
+		public List<OldName> OldFileNames { get; set; } = new List<OldName>();
 
 		/// <summary>
 		/// Полный путь к картинке категории
@@ -115,7 +123,7 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		{
 			if (oldNameIndex < 0 || oldNameIndex >= OldNames.Count)
 				throw new RequiredOldNameNotFoundException();
-			Name = OldNames[oldNameIndex];
+			Name = OldNames[oldNameIndex].Name;
 			OldNames.RemoveAt(oldNameIndex);
 		}
 
@@ -128,7 +136,7 @@ namespace BreedFoodStoreListopad.Domain.Entities
 		{
 			if (oldFileNameIndex < 0 || oldFileNameIndex >= OldFileNames.Count)
 				throw new RequiredOldFileNameNotFoundException();
-			FileName = OldFileNames[oldFileNameIndex];
+			FileName = OldFileNames[oldFileNameIndex].Name;
 			OldFileNames.RemoveAt(oldFileNameIndex);
 		}
 	}
